@@ -9,7 +9,7 @@ Customer segmentation helps businesses understand groups of customers with simil
 - **Annual Income (k$)**
 - **Spending Score (1–100)**
 
-The provided Flask application loads the saved model, accepts a CSV upload containing those columns, predicts a cluster for each row, and displays the resulting data as an HTML table.
+The Flask application loads the saved model, accepts a CSV upload, predicts a cluster for each row, and displays the resulting data as an HTML table.
 
 ## Features
 
@@ -29,7 +29,7 @@ The provided Flask application loads the saved model, accepts a CSV upload conta
 - **Jupyter Notebook** – model exploration and experimentation
 - **Pickle** – loading the saved model
 
-The application also uses the supporting Python packages listed in `requirements.txt`, including SciPy, Joblib, and Gunicorn.
+The application also uses supporting packages listed in `requirements.txt`, including SciPy, Joblib, and Gunicorn.
 
 ## Repository Structure
 
@@ -39,9 +39,10 @@ customer-segmentation-ML-/
 ├── customer_segmentation.ipynb  # Exploratory analysis/model notebook
 ├── customer_segmentation.pkl    # Saved clustering model
 ├── app.py                       # Flask application and prediction route
-├── index.html                   # CSV upload page
-├── requirements.txt             # Python dependencies
+├── templates/
+│   └── index.html               # CSV upload page rendered by Flask
 ├── static/                      # Static assets directory
+├── requirements.txt             # Python dependencies
 └── README.md                    # Project documentation
 ```
 
@@ -84,7 +85,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open the local address shown in the terminal (by default, `http://127.0.0.1:5000/`) in your browser.
+Open `http://127.0.0.1:5000/` in your browser.
 
 ## Input CSV Format
 
@@ -96,15 +97,15 @@ Annual Income (k$),Spending Score (1-100)
 16,81
 ```
 
-The example values above are illustrative. Include the same feature columns and compatible numeric values used to train the saved model.
+The example values are illustrative. Include the same feature columns and compatible numeric values used to train the saved model.
 
 ## Notes and Limitations
 
 - The web app expects the uploaded CSV to include both required feature columns.
-- The Flask route currently returns the prediction results as an HTML table.
+- The Flask route returns prediction results as an HTML table.
 - The saved model is loaded from `customer_segmentation.pkl` relative to the application's working directory.
-- The current app is a project/demo implementation. It does not include authentication, persistent upload storage, or a production deployment configuration.
-- Only upload CSV files you trust. The app currently performs basic file handling and should be hardened with validation, size limits, and safer error handling before public deployment.
+- The current app is a project/demo implementation. It does not include authentication, persistent upload storage, or production deployment configuration.
+- Only upload CSV files you trust. The app should be hardened with input validation, upload size limits, and safer error handling before public deployment.
 - Pickle files should only be loaded from trusted sources.
 
 ## Learning Outcomes
